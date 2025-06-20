@@ -21,12 +21,11 @@ jobs:
 
     steps:
       - name: 🔄 Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      
-      - name: ⚙️ Build Docker Image
-        run: |
-          docker build -t thatchayaini123/jun20:latest -f jun20old/Dockerfile jun20old
+      - name: 🐳 Build Docker Image
+        run: docker build -t thatchayaini123/jun20:latest -f jun20old/Dockerfile jun20old
+
 
       - name: 🧹 Remove Old Container If Exists
         run: |
