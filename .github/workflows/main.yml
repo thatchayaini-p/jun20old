@@ -26,7 +26,7 @@ jobs:
       
       - name: ⚙️ Build Docker Image
         run: |
-          docker build -t thatchayaini123/jun20:latest -f jun20/Dockerfile jun20
+          docker build -t thatchayaini123/jun20:latest 
 
       - name: 🧹 Remove Old Container If Exists
         run: |
