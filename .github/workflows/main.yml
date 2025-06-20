@@ -23,9 +23,13 @@ jobs:
       - name: 🔄 Checkout Code
         uses: actions/checkout@v4
 
+      - name: 🔐 Login to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
       - name: ⚙️ Build Docker Image
         run: |
-          docker build -t $DOCKER_USERNAME/$IMAGE_NAME:$TAG .
+          docker build -t $DOCKER_USERNAME/$IMAGE_NAME:$TAG -f jun20old/Dockerfile jun20old
 
       - name: 🧹 Remove Old Container If Exists
         run: |
@@ -38,13 +42,10 @@ jobs:
         run: |
           docker run -d --name $CONTAINER_NAME -p $PORT:$PORT $DOCKER_USERNAME/$IMAGE_NAME:$TAG
 
-      - name: 🔐 Login to Docker Hub
-        run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "$DOCKER_USERNAME" --password-stdin
-
       - name: 📤 Push Image to Docker Hub
         run: |
           docker push $DOCKER_USERNAME/$IMAGE_NAME:$TAG
+
 
 
 
