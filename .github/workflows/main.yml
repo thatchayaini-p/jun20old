@@ -25,7 +25,7 @@ jobs:
 
       - name: ⚙️ Build Docker Image
         run: |
-          docker build -t jun20 .
+           docker build -t $DOCKER_USERNAME/$IMAGE_NAME:$TAG .
 
       - name: 🧹 Remove Old Container If Exists
         run: |
