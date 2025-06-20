@@ -25,7 +25,7 @@ jobs:
 
       - name: ⚙️ Build Docker Image
         run: |
-          docker build -t $DOCKER_USERNAME/$IMAGE_NAME:$TAG -f jun20/Dockerfile jun20
+          docker build -t $DOCKER_USERNAME/$IMAGE_NAME:$TAG -f jun20/jun20demo/Dockerfile jun20/jun20demo
 
       - name: 🧹 Remove Old Container If Exists
         run: |
@@ -41,6 +41,7 @@ jobs:
       - name: 📤 Push to Docker Hub
         run: |
           docker push $DOCKER_USERNAME/$IMAGE_NAME:$TAG
+
 
 
 
