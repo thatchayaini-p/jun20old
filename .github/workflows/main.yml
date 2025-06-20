@@ -38,10 +38,14 @@ jobs:
         run: |
           docker run -d --name $CONTAINER_NAME -p $PORT:$PORT $DOCKER_USERNAME/$IMAGE_NAME:$TAG
 
-      - name: 📤 Push to Docker Hub
+      - name: 🔐 Login to Docker Hub
         run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u $DOCKER_USERNAME --password-stdin
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+      - name: 📤 Push Image to Docker Hub
+        run: |
           docker push $DOCKER_USERNAME/$IMAGE_NAME:$TAG
+
 
 
 
