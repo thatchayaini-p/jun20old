@@ -23,9 +23,8 @@ jobs:
       - name: 🔄 Checkout Code
         uses: actions/checkout@v3
 
-      - name: 🐳 Build Docker Image
-        run: docker build -t thatchayaini123/jun20:latest -f jun20old/Dockerfile jun20old
-
+      - name: 🐳 Build Docker Image from jun20old
+        run: docker build -t $DOCKER_USERNAME/$IMAGE_NAME:$TAG -f jun20old/Dockerfile jun20old
 
       - name: 🧹 Remove Old Container If Exists
         run: |
@@ -39,8 +38,9 @@ jobs:
           docker run -d --name $CONTAINER_NAME -p $PORT:$PORT $DOCKER_USERNAME/$IMAGE_NAME:$TAG
 
       - name: 📤 Push Image to Docker Hub
-        run: |
-          docker push $DOCKER_USERNAME/$IMAGE_NAME:$TAG
+        run: docker push $DOCKER_USERNAME/$IMAGE_NAME:$TAG
+`
+
 
 
 
